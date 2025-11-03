@@ -40,7 +40,7 @@
         <table border="1" style="width:100% ; border: 1px solid rgb(34, 33, 33) ; border-collapse: collapse;">
             <caption>Professional Experience Overview</caption>
             <thead style="background-color: cadetblue;">
-                <tr >
+                <tr>
                     <th style=" padding:15px;width:15% ">Company</th>
                     <th style=" padding:15px;width:10%">Logo</th>
                     <th style=" padding:15px;width:20% ">Role</th>
@@ -112,10 +112,11 @@
                     </td>
                     <td style="padding:20px;"> 2019-2020</td>
                 </tr>
-                </tbody>
+            </tbody>
             <tfoot>
                 <tr>
-                    <td style="padding:20px; border:0;font-size: 1rem;" colspan="4">Total Experience :5+ years in web development</td>
+                    <td style="padding:20px; border:0;font-size: 1rem;" colspan="4">Total Experience :5+ years in web
+                        development</td>
                 </tr>
             </tfoot>
         </table>
@@ -130,43 +131,68 @@
         <form style="width:30%">
             <fieldset>
                 <legend>Personal Information</legend>
-                <div style="margin-bottom: 10px; display: flex ; justify-content: space-between;">
-                    <label for="fname">First Name: *</label>
-                    <input type="text" name="firstname" id="fname" required>
-                </div>
-                <div style="margin-bottom: 10px; display: flex ; justify-content: space-between;">
-                    <label for="lname">Last Name: *</label>
-                    <input type="text" name="lastname" id="lname" required>
-                </div>
-                <div style="margin-bottom: 10px; display: flex ; justify-content: space-between;">
-                    <label for="email">Email Address: *</label>
-                    <input type="email" name="email" id="email" required>
-                </div>
-                <div style="margin-bottom: 10px; display: flex ; justify-content: space-between;">
-                    <label for="phone">Phone Number: </label>
-                    <input type="tel" name="phonenum" id="phone">
-                </div>
-                <div style="margin-bottom: 10px; display: flex ; justify-content: space-between;">
-                    <label for="date">Preferred Meeting Address : </label>
-                    <input type="date" name="date" id="date">
-                </div>
-                <div style="margin-bottom: 10px; display: flex ; justify-content: space-between;">
-                    <label for="time">Best Time To Contact : </label>
-                    <input type="time" name="time" id="time">
-                </div>
+                <table>
+                    <tr>
+                        <td> <label for="fname">First Name: *</label>
+                        </td>
+                        <td> <input type="text" name="firstname" id="fname" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="lname">Last Name: *</label>
+                        </td>
+                        <td>
+                            <input type="text" name="lastname" id="lname" required>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> <label for="email">Email Address: *</label>
+                        </td>
+                        <td> <input type="email" name="email" id="email" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> <label for="phone">Phone Number: </label>
+                        </td>
+                        <td> <input type="tel" name="phonenum" id="phone">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> <label for="date">Preferred Meeting Address : </label>
+                        </td>
+                        <td> <input type="date" name="date" id="date">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> <label for="time">Best Time To Contact : </label>
+                        </td>
+                        <td> <input type="time" name="time" id="time">
+                        </td>
+                    </tr>
+
+
+                </table>
 
 
             </fieldset>
             <fieldset style="margin-top:20px">
                 <legend>Project Details</legend>
-                <div style="margin-bottom: 10px; display: flex ; justify-content: space-between;">
-                    <label for="type">Project Type: * </label>
-                    <input type="text" name="type" id="type" required>
-                </div>
-                <div style="margin-bottom: 10px; display: flex ; justify-content: space-between;">
-                    <label for="desc">Project Describtion: * </label>
-                    <input type="text" name="desc" id="desc" required>
-                </div>
+                <table>
+                    <tr>
+                        <td> <label for="type">Project Type: * </label></td>
+                        <td> <input type="text" name="type" id="type" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> <label for="desc">Project Describtion: * </label>
+                        </td>
+                        <td> <input type="text" name="desc" id="desc" required>
+                        </td>
+                    </tr>
+                </table>
+
                 <div>
                     <label for="bugdet">Budget Range:</label>
                     <ul style="list-style-type: none; padding:0px">
