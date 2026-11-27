@@ -3,9 +3,8 @@ import { gender_enum } from "../utils/enums/user.enum.js";
 const emailRegex = /^[^\s@]+@[^\s@]+\.(com|org)$/i;
 const phoneRegex = /^01[0125][0-9]{8}$/;
 
-export function validateSignUp(body) {
+export function validateSignUp(name, email, password, gender, phone, DBB) {
   const errors = [];
-  const { name, email, password, gender, phone, DBB } = body;
   if (name.length < 8) {
     errors.push({ message: "must be at least 8 chars" });
   }
@@ -27,9 +26,8 @@ export function validateSignUp(body) {
   return errors;
 }
 
-export function validateLogin(body) {
+export function validateLogin(email) {
   const errors = [];
-  const { email } = body;
   if (!emailRegex.test(email)) {
     errors.push("invalid email typo");
   }

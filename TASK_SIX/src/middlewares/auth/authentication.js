@@ -1,8 +1,8 @@
 import { verifyToken } from "../../utils/security/token.js";
 import { UserModel } from "../../DB/models/User.model.js";
 export const authentication = async (req, res, next) => {
-  const token = req.headers.authorization;
-  if (token) {
+  const token = req.headers?.authorization;
+  if (!token) {
     return res.status(401).json({ message: "token not exist" });
   }
   const payload = verifyToken(token);

@@ -1,8 +1,11 @@
+
 import { UserModel } from "../../../DB/models/User.model.js";
-import bcrypt from "bcrypt";
-import { validateSignUp, validateLogin } from "../../../validation/user.validation.js";
+import { compareHash, generateHash } from "../../../utils/hash/hash.js";
+import {
+  validateSignUp,
+  validateLogin,
+} from "../../../validation/user.validation.js";
 import { generateToken } from "../../../utils/security/token.js";
-import "dotenv/config";
 
 export const signup = async ({
   name,
@@ -10,54 +13,92 @@ export const signup = async ({
   password,
   gender,
   phone,
-  DBB,
-} = {} ,res) => {
-  if (!name || !email || !gender || !password || !phone || !DBB) {
-    return res.status(409).json({
-      message: "enter all fields",
+  DOB,
+} = {}) => {
+  if (!name || !email || !gender || !password || !phone || !DOB) {
+    throw new Error("missing field", {
+      cause: { status: 400 },
     });
   }
 
-  const errorsSignUp = validateSignUp(req.body);
+  const errorsSignUp = validateSignUp({
+    name,
+    email,
+    password,
+    gender,
+    phone,
+    DOB,
+  });
+
   if (errorsSignUp.length) {
-    return res.status(400).json({
-      message: "validation error",
-      errorsSignUp,
+    throw new Error("validation error", {
+      cause: {
+        status: 400,
+        details: errorsSignUp,
+      },
     });
   }
 
   const existUser = await UserModel.findOne({ email, confirm: true });
-  if (existUser) {
-    return res.status(403).json({ message: "existed" });
-  }
-  const hashed = bcrypt.hashSync(password, 10);
-  await UserModel.create({
-    ...req.body,
-    password: hashed,
-  });
-  return 
-};
-export const login = async ( { email, password }={}) => {
 
-  if (!email || !password) {
-    return res.status(409).json({
-      message: "enter all fields",
+  if (existUser) {
+    throw new Error("user already exists", {
+      cause: { status: 409 },
     });
   }
 
-  const errorsLogin = validateLogin(req.body);
+  const hashed = generateHash(password)
+
+  const newUser = await UserModel.create({
+    name,
+    email,
+    gender,
+    phone,
+    DOB,
+    password: hashed,
+  });
+
+  return newUser
+};
+
+export const login = async ({ email, password } = {}) => {
+  if (!email || !password) {
+    throw new Error("missing field", {
+      cause: { status: 400 },
+    });
+  }
+
+  const errorsLogin = validateLogin({ email, password });
+
   if (errorsLogin.length) {
-    return res.status(400).json({ message: "vaidation error", errorsLogin });
+    throw new Error("validation error", {
+      cause: {
+        status: 400,
+        details: errorsLogin,
+      },
+    });
   }
 
   const existUser = await UserModel.findOne({ email });
+
   if (!existUser) {
-    return res.status(403).json({ message: "invalid email or password" });
+    throw new Error("invalid email or password", {
+      cause: { status: 401 },
+    });
   }
-  const checkPassword = bcrypt.compareSync(password, existUser.password);
+
+  const checkPassword = compareHash(password, existUser.password)
+
   if (!checkPassword) {
-    return res.status(403).json({ message: "invalid email or password" });
+    throw new Error("invalid email or password", {
+      cause: { status: 401 },
+    });
   }
-  const accessToken = generateToken(existUser._id, existUser.role);
+
+  const accessToken = generateToken(
+    existUser._id,
+    existUser.role
+  );
+
   return accessToken
 };

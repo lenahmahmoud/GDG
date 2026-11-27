@@ -3,7 +3,13 @@ export const gender_enum = {
   female: "female",
 };
 
-export const roles_enum={
-    user:'user',
-    admin:'admin'
-}
+export const roles_enum = {
+  user: "user",
+  admin: "admin",
+};
+
+export const updateFields_enum = {
+  name: "name",
+  gender: "gender",
+  DOB:"DOB"
+};

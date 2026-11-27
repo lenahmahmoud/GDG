@@ -28,7 +28,7 @@ const userSchema = new Schema(
       required: true,
       enum: Object.values(roles_enum),
     },
-    DBB: Date,
+    DOB: Date,
     confirm: { type: Boolean, default: true },
     profileImg: String,
   },

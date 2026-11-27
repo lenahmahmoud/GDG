@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
-
+import { MONGO_URI } from "../../config/config.service.js";
 export default async function dbConnection() {
   try {
     await mongoose.connect(
-      "mongodb+srv://lenahmahmoud08_db_user:RHVvOQJhnQDYI5ue@cluster0.ttctaf7.mongodb.net/?compressors=zlib",
+     MONGO_URI,
     );
 
     console.log("connected ");
